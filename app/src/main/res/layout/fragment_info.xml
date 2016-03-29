@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<ImageView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/fullsawbo"
+    android:id="@+id/imageView3"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="77dp" />
+
+<ImageView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/logoph"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp"
+    android:id="@+id/imageView" />
+
+<ImageView
+    android:layout_height="70dp"
+    android:layout_width="150dp"
+    android:src="@drawable/sawbo"
+    android:id="@+id/imageView2"
+    android:layout_above="@+id/imageView3"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="80dp" />
+
+<Button
+    android:layout_width="100dp"
+    android:layout_height="40dp"
+    android:text="Donate"
+    android:textColor="#FFFFFF"
+    android:id="@+id/donate_btn"
+    android:layout_marginBottom="39dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/donatebtn" />
+
+
+</RelativeLayout>
+
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#ffffff" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:scaleType="centerInside"
+        android:src="@drawable/logoph"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:id="@+id/imageView" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:scaleType="centerInside"
+        android:src="@drawable/sawbo"
+        android:id="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:scaleType="centerInside"
+        android:src="@drawable/fullsawbo"
+        android:id="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+        <TextView
+            android:id="@+id/txtaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/address"/>
+
+        <TextView
+            android:id="@+id/txtaddress2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/address2"/>
+
+        <TextView
+            android:id="@+id/txtaddress3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/address3"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/version_str"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tel"
+            android:textColor="#000000"
+            android:id="@+id/tel_btn"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textColor="#000000"
+            android:id="@+id/email_btn"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/web"
+            android:textColor="#000000"
+            android:id="@+id/web_btn"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp" >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/locationset_str"
+                android:textColor="#000000"
+                android:id="@+id/location_btn"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_settings"
+                android:visibility="gone"
+                android:textColor="#000000"
+                android:id="@+id/language_btn"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/videotut_str"
+            android:textColor="#FFFFFF"
+            android:id="@+id/help_btn"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/donatebtn" />
+    </LinearLayout>
+
+    <!--
+    <TextView
+        android:id="@+id/txtLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="Help"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="16dp"
+        android:text="GPS Accuracy"/>
+
+
+    <Spinner
+        android:id="@+id/spinner_accuracy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        -->
+
+</LinearLayout>

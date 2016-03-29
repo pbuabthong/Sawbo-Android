@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen Orientation -->
+    <!--
+        4 - SCREEN_ORIENTATION_SENSOR
+        6 - SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        7 - SCREEN_ORIENTATION_SENSOR_PORTRAIT
+    -->
+    <integer name="agreement_orient">7</integer>
+    <integer name="browse_orient">7</integer>
+    <integer name="downloads_orient">7</integer>
+    <integer name="filter_orient">7</integer>
+    <integer name="home_orient">7</integer>
+    <integer name="info_orient">7</integer>
+    <integer name="location_orient">7</integer>
+    <integer name="main_orient">7</integer>
+    <integer name="share_orient">7</integer>
+    <integer name="videodetail_orient">7</integer>
+    <integer name="videoplayback_orient">7</integer>
+
+
+    <integer name="gsim_port">1731</integer>
+</resources>

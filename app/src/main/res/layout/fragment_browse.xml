@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff" >
+
+    <Button
+        android:id="@+id/fulllist_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fulllist_str"
+        android:enabled="false"
+        android:background="#ffd7d7d7" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/topic_btn_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="33"
+            android:text="@string/topic_str"
+            android:enabled="false"
+            android:background="#ffd7d7d7" />
+
+        <Button
+            android:id="@+id/language_btn_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="33"
+            android:text="@string/language_str"
+            android:enabled="false"
+            android:background="#ffd7d7d7" />
+
+        <Button
+            android:id="@+id/country_btn_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="33"
+            android:text="@string/country_str"
+            android:enabled="false"
+            android:background="#ffd7d7d7" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/browse_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <Button
+        android:id="@+id/alert_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="33"
+        android:text="@string/nofilter"
+        android:enabled="false"
+        android:visibility="invisible"
+        android:background="#ffffff" />
+
+</LinearLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">SAWBO</string>
+    <string name="app_package" translatable="false">edu.uiuc.sawbo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Language Interface</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+    <string name="showAgreement">true</string>
+    <string name="quit" translatable="false">Exit program?</string>
+    <string name="really_quit" translatable="false">Do you want to exit?</string>
+    <string name="noquit" translatable="false">No</string>
+    <string name="twice" translatable="false">Press twice to exit</string>
+
+    <!-- URL -->
+    <string name="donate_url" translatable="false">http://sawbo-illinois.org/donate.htm</string>
+    <string name="totallist_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/totallist.php</string>
+    <string name="video_url" translatable="false">http://sawbo.illinois.edu/mobile_app/sources/</string>
+    <string name="email_url" translatable="false">animations@illinois.edu</string>
+    <string name="sawbo_url" translatable="false">http://sawbo.illinois.edu/</string>
+    <string name="call_url" translatable="false">tel:+12173336538</string>
+    <string name="title_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/title/title.txt</string>
+    <string name="ip_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/ip.php</string>
+    <string name="gsim_url" translatable="false">gsim.cs.illinois.edu</string>
+    <string name="newsjson_url" translatable="false">http://www.sawbo-illinois.org//mobile_app/news.json</string>
+
+    <!-- Email -->
+    <string name="volunteersubj_str">Volunteer Voice Overlay</string>
+    <string name="volunteerbody_str">Hello, I\'m interested to volunteer for SAWBO voice overlay. \nName:\nEmail:\nTopic:\nLanguage:\nCountry:</string>
+    <string name="emailintent_str">Choose an Email client :</string>
+    <string name="inquirysubj_str">SAWBO: Inquiry</string>
+    <string name="inquirybody_str">\n\n Name:\n Email:\n Topic:\n Language:\n Country:\n</string>
+
+    <!-- Home Fragment -->
+    <string name="donate_str">Donate to SAWBO</string>
+
+    <!-- Browse Fragment -->
+    <string name="fulllist_str">Show full list</string>
+    <string name="topic_str">Topic</string>
+    <string name="country_str">Country</string>
+    <string name="language_str">Language</string>
+    <string name="nointernet">Please check your internet connection. This section of the app only works if you have an internet connection.</string>
+    <string name="nofilter">No animations available with this filter combination. If you would like to help us fill this empty space email SAWBO at animations@illinois.edu</string>
+    <string name="loading">Loading</string>
+    <string name="header_str" translatable="false">Header</string>
+
+    <!-- VideoDetail Fragment -->
+    <string name="size_str">Size: </string>
+    <string name="properties_str">Properties</string>
+    <string name="avoffline_str">Available offline</string>
+    <string name="download_str">Download</string>
+    <string name="downloading_str">Downloading</string>
+    <string name="downloadprog_str">Download in progress</string>
+    <string name="downloadsawbo_str">Download from SAWBO</string>
+    <string name="succdown_str">Successfully downloaded</string>
+    <string name="url_copy_dialog">The video URL has been copied</string>
+    <string name="url_copy">Copy URL</string>
+    <string name="stopdownload_str">Are you sure you want to stop downloading?</string>
+
+    <!-- Download Fragment -->
+    <string name="sending_str">Sending video &#8230;&#8230;&#8230; \n *If no progress bar appears on the receiver\'s phone, make sure that the receiver on the other phone has been turned on (press the Bluetooth logo on the Share page) then restart the process again.</string>
+    <string name="sent_str">The video was sent successfully</string>
+    <string name="connecting_str">Connecting &#8230;&#8230;&#8230;</string>
+    <string name="cannotcon_str">Could not connect to the paired device. Make sure the receiver on the other device has been turned on (press the Bluetooth logo in the Share page).</string>
+    <string name="stopsending_str">Are you sure you want to stop sending?</string>
+    <string name="sendfail_str">The video was sent, but didn\'t go through correctly</string>
+    <string name="novideo_str" translatable="false">You don\'t have any downloads at the moment.  To download a video, connect to the internet go to the browse tab, find your video of choice, then click to download it.</string>
+    <string name="confirmreceiver_str">Has the person you want to share the video with turned on their receive function in their SAWBO app? The other person will need to press the Bluetooth(R) logo in their share page before you press the Yes button below.</string>
+
+    <!-- Dialog Fragment -->
+    <string name="sharesawbo_str">Share to another SAWBO app</string>
+    <string name="sharebluetooth_str">Share to another Bluetooth device</string>
+    <string name="delete_str">Delete</string>
+
+    <!-- Share Fragment -->
+    <string name="sharetitle_str">This page will allow you to receive videos from another SAWBO Deployer App on another Android device.</string>
+    <string name="receivedesc_str" translatable="false">Receive videos through SAWBO App-to-App sharing\n*(Click for more details)</string>
+    <string name="sharesawbodesc_str" translatable="false">Share the SAWBO App with another Android device\n*(Click for more details)</string>
+    <string name="senddesc_str" translatable="false">Share your downloaded videos with another cell phone\n*(Click for more details)</string>
+    <string name="note_str">NOTE: Sharing options are not compatible with iOS devices.</string>
+    <string name="receiving_str">Receiving video&#8230;&#8230;&#8230;</string>
+    <string name="wrongheader_str">Video was sent, but the header was formatted incorrectly</string>
+    <string name="received_str">Video was received, please check your "Downloads" page</string>
+    <string name="stopreceving_str">Are you sure you want to stop receiving?</string>
+    <string name="waiting_str">Waiting for paired device. Please connect to:\n</string>
+    <string name="mustopen_str">*YOU MUST PRESS THIS RECEIVE BUTTON FIRST BEFORE THE OTHER PERSON SHARES THE VIDEO</string>
+    <string name="sharesawbo_long_str" translatable="false">Press the button to the left to share the App itself with another Android device. You will need to allow the other Android device to receive the file. Once completed the other device will have the SAWBO App and it can share it with others. You can share this App with as many people as you would like.</string>
+    <string name="sharenormal_long_str" translatable="false">You can share the videos you have downloaded with other Bluetooth and video capable cell phones, tablets and other devices. Simply go to your downloads section in the SAWBO App and press, for three seconds, on the video you would like to share. A pop-up will give you the option to share to another phone with the SAWBO App or devices without the SAWBO App.</string>
+    <string name="receive_long_str" translatable="false">Press the button to the left to allow your SAWBO App to receive a video from someone else’s SAWBO App. Once you have set your device to receive a video the other person will need to send you the video as described above. The video will go into your downloads folder in your SAWBO App.</string>
+
+    <!-- Info Fragment -->
+    <string name="address" translatable="false">University of Illinois at Urbana Champaign</string>
+    <string name="address2" translatable="false">Room 518 - Morrill Hall 505 South Goodwin</string>
+    <string name="address3" translatable="false">Avenue, Urbana, Illinois 61801 USA</string>
+    <string name="tel" translatable="false">Tel: +1 (217) 333&#8211;6538</string>
+    <string name="email">Email: animations@illinois.edu</string>
+    <string name="web" translatable="false">Web:sawbo.illinois.edu</string>
+    <string name="locationset_str">Location setting</string>
+    <string name="videotut_str">Video tutorial</string>
+    <string name="version_str">Ver 1.0</string>
+
+    <!-- Location Setting -->
+    <string name="locsettitle_str">Would you allow us to track your location using GPS\?</string>
+    <string name="yes_str">Yes</string>
+    <string name="no_str">No*</string>
+    <string name="footnote_str">*By choosing no, we will keep track of the possible location using only the IP address.</string>
+
+    <!-- Language Setting -->
+    <string name="langtitle_str" translatable="false">Language</string>
+    <string-array name="lang_list" translatable="false">
+        <item >English</item>
+        <item >Spanish</item>
+        <item >French</item>
+        <item >Thai</item>
+    </string-array>
+    <string name="successchg_str">Your language has been change to &#160;</string>
+
+    <!-- Update Dialog -->
+    <string name="updatetitle_str">Updates</string>
+    <string name="ok">Ok</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >Home</item>
+        <item >Browse</item>
+        <item >Downloads</item>
+        <item >Share</item>
+        <item >Info</item>
+        <item >Test</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_browse</item>
+        <item>@drawable/ic_download</item>
+        <item>@drawable/ic_share</item>
+        <item>@drawable/ic_info</item>
+    </array>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <string name="send">Send</string>
+    <string name="not_connected">You are not connected to a device</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled.</string>
+    <string name="title_connecting">connecting...</string>
+    <string name="title_connected_to">connected to</string>
+    <string name="title_not_connected">not connected</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">Scanning for devices...</string>
+    <string name="select_device">Select a device</string>
+    <string name="none_paired">No devices have been paired. \n Please pair your device from the Bluetooth menu in your phone.</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+
+    <!-- Options Menu -->
+    <string name="secure_connect">Connect a device - Secure</string>
+    <string name="insecure_connect">Connect a device - Insecure</string>
+    <string name="discoverable">Make discoverable</string>
+
+    <!--Disclaimer-->
+    <integer name="usegps_default">1</integer>
+</resources>
