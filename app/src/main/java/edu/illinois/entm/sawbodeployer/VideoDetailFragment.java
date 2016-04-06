@@ -3,12 +3,14 @@ package edu.illinois.entm.sawbodeployer;
 
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
@@ -30,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -238,7 +241,7 @@ public class VideoDetailFragment extends Fragment {
                     //download_btn.setEnabled(false);
                     download_btn.invalidate();
 
-                    if (isDownloadManagerAvailable(getActivity())) {
+                    if (resolveEnable(getActivity())) {
                         try {
                             String urlvideo = URLEncoder.encode(videoFilename, "UTF-8").replace("+", "%20");
                             Log.v("encode url", urlvideo);
@@ -259,6 +262,7 @@ public class VideoDetailFragment extends Fragment {
                             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, videoFilename);
 
                             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+
                             downloadID = manager.enqueue(request);
 
                             onComplete = new BroadcastReceiver() {
@@ -322,6 +326,33 @@ public class VideoDetailFragment extends Fragment {
                         } catch (MalformedURLException e) {
 
                         }
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage("Could not find Download Manager. If your device has a Download Manager, please ensure that it is enabled.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        try {
+                                            //Open the specific App Info page:
+                                            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            intent.setData(Uri.parse("package:" + "com.android.providers.downloads"));
+                                            startActivity(intent);
+
+                                        } catch (ActivityNotFoundException e) {
+                                            //e.printStackTrace();
+
+                                            Toast.makeText(getActivity(), "Your phone is not compatible and will not be able to download videos.", Toast.LENGTH_LONG).show();
+
+                                        }
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
+                        stopDownload = false;
+                        download_btn.setText("Download");
+                        download_btn.setEnabled(true);
+                        download_btn.invalidate();
                     }
                     //DownloadFromURL();
                     //new DownloadVideo().execute(new String[]{});
@@ -498,7 +529,7 @@ public class VideoDetailFragment extends Fragment {
         out.close();
     }
 
-    public static boolean isDownloadManagerAvailable(Context context) {
+    /*public static boolean isDownloadManagerAvailable(Context context) {
         try {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
                 return false;
@@ -506,11 +537,35 @@ public class VideoDetailFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             intent.setClassName("com.android.providers.downloads.ui", "com.android.providers.downloads.ui.DownloadList");
-            List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent,
-                    PackageManager.MATCH_DEFAULT_ONLY);
+
+            List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent,0);
+            int length = list.size();
+            Log.v("testing", "testing");
+            for(int i = 0; i<length; i++){
+                ResolveInfo info = list.get(i);
+                Log.v("package","package: " + info.toString());
+            }
             return list.size() > 0;
         } catch (Exception e) {
             return false;
+        }
+    }*/
+    private static boolean resolveEnable(Context context) {
+        int state;
+        try {
+             state = context.getPackageManager()
+                    .getApplicationEnabledSetting("com.android.providers.downloads");
+        }catch(IllegalArgumentException e){
+            return false;
+        }
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            return !(state == PackageManager.COMPONENT_ENABLED_STATE_DISABLED ||
+                    state == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
+                    || state == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED);
+        } else {
+            return !(state == PackageManager.COMPONENT_ENABLED_STATE_DISABLED ||
+                    state == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER);
         }
     }
 

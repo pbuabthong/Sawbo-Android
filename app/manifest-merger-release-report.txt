@@ -55,53 +55,51 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:15:5
 	android:name
 		ADDED from AndroidManifest.xml:15:22
-uses-sdk
+application
 ADDED from AndroidManifest.xml:17:5
-	android:targetSdkVersion
+	android:label
+		ADDED from AndroidManifest.xml:20:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:18:9
+	android:icon
 		ADDED from AndroidManifest.xml:19:9
+	android:theme
+		ADDED from AndroidManifest.xml:21:9
+activity#edu.illinois.entm.sawbodeployer.MainActivity
+ADDED from AndroidManifest.xml:22:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:26:13
+	android:label
+		ADDED from AndroidManifest.xml:24:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:25:13
+	android:name
+		ADDED from AndroidManifest.xml:23:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:27:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:28:17
+	android:name
+		ADDED from AndroidManifest.xml:28:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:30:17
+	android:name
+		ADDED from AndroidManifest.xml:30:27
+activity#edu.illinois.entm.sawbodeployer.DeviceListActivity
+ADDED from AndroidManifest.xml:33:9
+	android:label
+		ADDED from AndroidManifest.xml:34:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:36:13
+	android:theme
+		ADDED from AndroidManifest.xml:35:13
+	android:name
+		ADDED from AndroidManifest.xml:33:19
+uses-sdk
+INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 	android:minSdkVersion
-		ADDED from AndroidManifest.xml:18:9
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
-application
-ADDED from AndroidManifest.xml:21:5
-	android:label
-		ADDED from AndroidManifest.xml:24:9
-	android:allowBackup
-		ADDED from AndroidManifest.xml:22:9
-	android:icon
-		ADDED from AndroidManifest.xml:23:9
-	android:theme
-		ADDED from AndroidManifest.xml:25:9
-activity#edu.illinois.entm.sawbodeployer.MainActivity
-ADDED from AndroidManifest.xml:26:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:30:13
-	android:label
-		ADDED from AndroidManifest.xml:28:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:29:13
-	android:name
-		ADDED from AndroidManifest.xml:27:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:31:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:32:17
-	android:name
-		ADDED from AndroidManifest.xml:32:25
-category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:34:17
-	android:name
-		ADDED from AndroidManifest.xml:34:27
-activity#edu.illinois.entm.sawbodeployer.DeviceListActivity
-ADDED from AndroidManifest.xml:37:9
-	android:label
-		ADDED from AndroidManifest.xml:38:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:40:13
-	android:theme
-		ADDED from AndroidManifest.xml:39:13
-	android:name
-		ADDED from AndroidManifest.xml:37:19
