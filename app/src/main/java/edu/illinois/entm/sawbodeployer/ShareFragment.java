@@ -71,7 +71,7 @@ public class ShareFragment extends Fragment {
     ServerThread st;
     ClientThread ct;
 
-    boolean fragmentPresent = true;
+    boolean receiving = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -250,8 +250,9 @@ public class ShareFragment extends Fragment {
                                     .setCancelable(false)
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            st.cancel();
+                                            st.cancelRun();
                                             waitingDialog.dismiss();
+                                            waitingDialog = null;
                                         }
                                     })
                                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -293,8 +294,10 @@ public class ShareFragment extends Fragment {
         public void handleMessage(Message message) {
                 switch (message.what) {
                     case MessageType.DATA_RECEIVED: {
-                        waitingDialog.dismiss();
-                        waitingDialog = null;
+                        if(waitingDialog!=null){
+                            waitingDialog.dismiss();
+                            waitingDialog = null;
+                        }
                         if (progressDialog != null) {
                             progressDialog.dismiss();
                             progressDialog = null;
@@ -360,7 +363,7 @@ public class ShareFragment extends Fragment {
                         // some kind of update
                         progressData = (ProgressData) message.obj;
                         double pctRemaining = 100 - (((double) progressData.remainingSize / progressData.totalSize) * 100);
-                        if (progressDialog == null) {
+                        if (progressDialog == null && receiving) {
                             progressDialog = new ProgressDialog(getActivity());
                             progressDialog.setMessage(getResources().getString(R.string.receiving_str));
                             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -375,7 +378,16 @@ public class ShareFragment extends Fragment {
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     st.cancel();
-                                                    progressDialog.dismiss();
+                                                    if(progressDialog!=null){
+                                                        progressDialog.dismiss();
+                                                        progressDialog=null;
+                                                    }
+                                                    receiving=false;
+                                                    if (waitingDialog!=null){
+                                                        waitingDialog.dismiss();
+                                                        waitingDialog=null;
+                                                    }
+
                                                 }
                                             })
                                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -388,10 +400,13 @@ public class ShareFragment extends Fragment {
                                     alert.show();
                                 }
                             });
-                            progressDialog.setCanceledOnTouchOutside(true);
-                            progressDialog.show();
+                                progressDialog.setCanceledOnTouchOutside(true);
+                                progressDialog.show();
+
                         }
-                        progressDialog.setProgress((int) Math.floor(pctRemaining));
+                        if (receiving) {
+                            progressDialog.setProgress((int) Math.floor(pctRemaining));
+                        }
                         break;
 
                     }
@@ -411,19 +426,9 @@ public class ShareFragment extends Fragment {
         }
 
         st = new ServerThread(mBluetoothAdapter, serverHandler);
+        receiving=true;
         st.start();
 
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        fragmentPresent = true;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        fragmentPresent = false;
     }
 }
 

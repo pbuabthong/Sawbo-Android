@@ -13,6 +13,7 @@ public class ServerThread extends Thread {
     private final String TAG = "android-btxfr/ServerThread";
     private final BluetoothServerSocket serverSocket;
     private Handler handler;
+    BluetoothSocket socket;
 
     public ServerThread(BluetoothAdapter adapter, Handler handler) {
         this.handler = handler;
@@ -26,7 +27,6 @@ public class ServerThread extends Thread {
     }
 
     public void run() {
-        BluetoothSocket socket = null;
         if (serverSocket == null)
         {
             Log.d(TAG, "Server socket is null - something went wrong with Bluetooth stack initialization?");
@@ -36,6 +36,7 @@ public class ServerThread extends Thread {
             try {
                 Log.v(TAG, "Opening new server socket");
                 socket = serverSocket.accept();
+                serverSocket.close();
 
                 try {
                     Log.v(TAG, "Got connection from client.  Spawning new data transfer thread.");
@@ -55,9 +56,19 @@ public class ServerThread extends Thread {
     public void cancel() {
         try {
             Log.v(TAG, "Trying to close the server socket");
-            serverSocket.close();
+            if(socket.isConnected()){
+                socket.close();
+            }
         } catch (Exception e) {
             Log.e(TAG, e.toString());
+        }
+    }
+    public void cancelRun(){
+        try{
+
+            serverSocket.close();
+        }catch (Exception e){
+            //TODO
         }
     }
 }
