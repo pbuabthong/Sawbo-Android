@@ -185,92 +185,95 @@ public class BrowseFragment extends Fragment {
         l = (ListView) rootView.findViewById(R.id.browse_list);
         dispArray = vidArray;
 
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            alert_btn.setVisibility(View.VISIBLE);
-            alert_btn.setText(R.string.nointernet);
-            alert_btn.setEnabled(false);
-        } else {
-            alert_btn.setVisibility(View.VISIBLE);
-            alert_btn.setText(R.string.loading);
-            alert_btn.setEnabled(false);
-        }
+        if(getActivity()!=null) {
+            ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if(!filterArray.get("Topic").isEmpty()){
-            dispArray = filterList(dispArray, filterArray.get("Topic"), "video");
-        }
-
-        if(!filterArray.get("Language").isEmpty()){
-            dispArray = filterList(dispArray, filterArray.get("Language"), "language");
-        }
-
-        if(!filterArray.get("Country").isEmpty()){
-            dispArray = filterList(dispArray, filterArray.get("Country"), "country");
-        }
-
-        Log.v("dispArray", String.valueOf(dispArray.size()));
-
-        if(dispArray.size()==0 && goneHashprepare) {
-            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            ni = cm.getActiveNetworkInfo();
+            NetworkInfo ni = cm.getActiveNetworkInfo();
             if (ni == null) {
                 alert_btn.setVisibility(View.VISIBLE);
                 alert_btn.setText(R.string.nointernet);
                 alert_btn.setEnabled(false);
             } else {
                 alert_btn.setVisibility(View.VISIBLE);
-                alert_btn.setText(R.string.nofilter);
-                alert_btn.setEnabled(true);
+                alert_btn.setText(R.string.loading);
+                alert_btn.setEnabled(false);
+            }
+
+            if (!filterArray.get("Topic").isEmpty()) {
+                dispArray = filterList(dispArray, filterArray.get("Topic"), "video");
+            }
+
+            if (!filterArray.get("Language").isEmpty()) {
+                dispArray = filterList(dispArray, filterArray.get("Language"), "language");
+            }
+
+            if (!filterArray.get("Country").isEmpty()) {
+                dispArray = filterList(dispArray, filterArray.get("Country"), "country");
+            }
+
+            Log.v("dispArray", String.valueOf(dispArray.size()));
+
+            if (dispArray.size() == 0 && goneHashprepare) {
+                cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                ni = cm.getActiveNetworkInfo();
+                if (ni == null) {
+                    alert_btn.setVisibility(View.VISIBLE);
+                    alert_btn.setText(R.string.nointernet);
+                    alert_btn.setEnabled(false);
+                } else {
+                    alert_btn.setVisibility(View.VISIBLE);
+                    alert_btn.setText(R.string.nofilter);
+                    alert_btn.setEnabled(true);
+                    fulllist_btn.setEnabled(true);
+                }
+            } else {
+                alert_btn.setVisibility(View.GONE);
+                alert_btn.setEnabled(false);
+            }
+
+            if (dispArray.size() > 0) {
+                String[] values = new String[dispArray.size()];
+                int count = 0;
+                Log.i("BrowseFragment", String.valueOf(dispArray.size()));
+                String fullTitle;
+                for (HashMap<String, String> hashMap : dispArray) {
+                    fullTitle = titleArray.get(hashMap.get("video"));
+                    String addlight = "";
+                    if (hashMap.get("filename").contains("_Light")) {
+                        addlight = " | Light";
+                    }
+                    if (fullTitle == null) fullTitle = hashMap.get("video");
+                    values[count] = fullTitle + "^^" + hashMap.get("language")
+                            + " | " + hashMap.get("country") + addlight;
+                    //Log.i("Test", values[count]);
+                    count++;
+                }
+
+                BrowseListArrayAdapter adapter = new BrowseListArrayAdapter(getActivity(), values);
+                l.setAdapter(adapter);
+                l.setOnItemClickListener(
+                        new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> arg0, View view,
+                                                    int position, long id) {
+                                Log.v("int", dispArray.get(position).get("filename"));
+                                WriteLog wl = new WriteLog();
+                                wl.sendLog(getActivity());
+                                Log.v("BrowseFragment", "come back to Browse");
+                                VideoDetailFragment fragment = null;
+                                fragment = new VideoDetailFragment();
+                                fragment.videoFilename = dispArray.get(position).get("filename");
+                                FragmentManager fragmentManager = getFragmentManager();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+                            }
+                        }
+                );
+                topic_btn.setEnabled(true);
+                language_btn.setEnabled(true);
+                country_btn.setEnabled(true);
                 fulllist_btn.setEnabled(true);
             }
-        }else{
-            alert_btn.setVisibility(View.GONE);
-            alert_btn.setEnabled(false);
-        }
-
-        if(dispArray.size()>0) {
-            String[] values = new String[dispArray.size()];
-            int count = 0;
-            Log.i("BrowseFragment", String.valueOf(dispArray.size()));
-            String fullTitle;
-            for (HashMap<String, String> hashMap : dispArray) {
-                fullTitle = titleArray.get(hashMap.get("video"));
-                String addlight = "";
-                if (hashMap.get("filename").contains("_Light")) {
-                    addlight = " | Light";
-                }
-                if (fullTitle == null) fullTitle = hashMap.get("video");
-                values[count] = fullTitle + "^^" + hashMap.get("language")
-                        + " | " + hashMap.get("country") + addlight;
-                //Log.i("Test", values[count]);
-                count++;
-            }
-
-            BrowseListArrayAdapter adapter = new BrowseListArrayAdapter(getActivity(), values);
-            l.setAdapter(adapter);
-            l.setOnItemClickListener(
-                    new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> arg0, View view,
-                                                int position, long id) {
-                            Log.v("int", dispArray.get(position).get("filename"));
-                            WriteLog wl = new WriteLog();
-                            wl.sendLog(getActivity());
-                            Log.v("BrowseFragment", "come back to Browse");
-                            VideoDetailFragment fragment = null;
-                            fragment = new VideoDetailFragment();
-                            fragment.videoFilename = dispArray.get(position).get("filename");
-                            FragmentManager fragmentManager = getFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
-                        }
-                    }
-            );
-            topic_btn.setEnabled(true);
-            language_btn.setEnabled(true);
-            country_btn.setEnabled(true);
-            fulllist_btn.setEnabled(true);
         }
 
     }
