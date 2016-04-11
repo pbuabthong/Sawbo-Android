@@ -17,7 +17,7 @@
     <string name="donate_url" translatable="false">http://www.sawbo-illinois.org/donate.htm</string>
     <string name="totallist_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/totallist_sources_test.php</string>
     <string name="video_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/sources_test/</string>
-    <string name="email_url" translatable="false">animations@illinois.edu</string>
+    <string name="email_url" translatable="false">contact@sawbo-animations.org</string>
     <string name="sawbo_url" translatable="false">http://www.sawbo-illinois.org/</string>
     <string name="call_url" translatable="false">tel:+12173336538</string>
     <string name="title_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/title/title.txt</string>
@@ -94,8 +94,8 @@
     <string name="address2" translatable="false">Room 518 - Morrill Hall 505 South Goodwin</string>
     <string name="address3" translatable="false">Avenue, Urbana, Illinois 61801 USA</string>
     <string name="tel" translatable="false">Tel: +1 (217) 333&#8211;6538</string>
-    <string name="email">Email: animations@illinois.edu</string>
-    <string name="web" translatable="false">Web:sawbo.illinois.edu</string>
+    <string name="email">Email: contact@sawbo-animations.org</string>
+    <string name="web" translatable="false">Web:sawbo-animations.org</string>
     <string name="locationset_str">Location setting</string>
     <string name="videotut_str">Video tutorial</string>
     <string name="version_str">Ver 1.1</string>

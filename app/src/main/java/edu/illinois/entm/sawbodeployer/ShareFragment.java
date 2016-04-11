@@ -11,6 +11,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
@@ -160,7 +161,22 @@ public class ShareFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        PackageManager pm = getActivity().getPackageManager();
+                        final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+                        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        final List pkgAppsList = getActivity().getPackageManager().queryIntentActivities(mainIntent, 0);
+                        String filepath;
+                        for (Object object : pkgAppsList) {
+                            ResolveInfo info = (ResolveInfo) object;
+                            File file = new File(info.activityInfo.applicationInfo.publicSourceDir);
+                            filepath = file.getAbsolutePath();
+                            if (filepath.contains(getResources().getString(R.string.app_package))) {
+                                appFilepath = filepath;
+                                Log.v("test", appFilepath);
+                            }
+                            // Copy the .apk file to wherever
+                        }
+
+                        /*PackageManager pm = getActivity().getPackageManager();
                         List<PackageInfo> pkginfo_list = pm.getInstalledPackages(PackageManager.GET_ACTIVITIES);
                         List<ApplicationInfo> appinfo_list = pm.getInstalledApplications(0);
                         for (int x = 0; x < pkginfo_list.size(); x++) {
@@ -169,7 +185,7 @@ public class ShareFragment extends Fragment {
                             if (app_filename.contains(getResources().getString(R.string.app_package))) {
                                 appFilepath = app_filename;
                             }
-                        }
+                        }*/
                         // OBEX
                         File src = new File(appFilepath);
                         File dst = new File(getActivity().getFilesDir() + "/" + "sawbo.apk");
@@ -249,20 +265,26 @@ public class ShareFragment extends Fragment {
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             st.cancelRun();
-                                            waitingDialog.dismiss();
-                                            waitingDialog = null;
+                                            if(waitingDialog!=null) {
+                                                waitingDialog.dismiss();
+                                                waitingDialog = null;
+                                            }
                                         }
                                     })
                                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            waitingDialog.show();
+                                            if(waitingDialog!=null) {
+                                                waitingDialog.show();
+                                            }
                                         }
                                     });
                             AlertDialog alert = builder.create();
                             alert.show();
                         }
                     });
-                    waitingDialog.show();
+                    if(waitingDialog!=null) {
+                        waitingDialog.show();
+                    }
                     receiverBTReader();
 
                 }
@@ -348,6 +370,7 @@ public class ShareFragment extends Fragment {
 //                    ImageView imageView = (ImageView) findViewById(R.id.imageView);
 //                    imageView.setImageBitmap(image);
                         Toast.makeText(getActivity(), getResources().getString(R.string.received_str), Toast.LENGTH_SHORT).show();
+                        st.cancel();
                         break;
                     }
 
@@ -361,6 +384,7 @@ public class ShareFragment extends Fragment {
                             waitingDialog=null;
                         }
                         Toast.makeText(getActivity(), getResources().getString(R.string.sendfail_str), Toast.LENGTH_SHORT).show();
+                        st.cancel();
                         break;
                     }
 
@@ -397,7 +421,9 @@ public class ShareFragment extends Fragment {
                                                 })
                                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
-                                                        progressDialog.show();
+                                                        if(progressDialog!=null) {
+                                                            progressDialog.show();
+                                                        }
                                                         return;
                                                     }
                                                 });
@@ -406,10 +432,14 @@ public class ShareFragment extends Fragment {
                                     }
                                 });
                                 progressDialog.setCanceledOnTouchOutside(true);
-                                progressDialog.show();
+                                if(progressDialog!=null) {
+                                    progressDialog.show();
+                                }
 
                             }
+                            if(progressDialog!=null) {
                                 progressDialog.setProgress((int) Math.floor(pctRemaining));
+                            }
 
                         }catch(Exception e){
                             Log.v("Receiving exception: ", e.getMessage());
@@ -428,6 +458,7 @@ public class ShareFragment extends Fragment {
                             waitingDialog=null;
                         }
                         Toast.makeText(getActivity(), getResources().getString(R.string.wrongheader_str), Toast.LENGTH_SHORT).show();
+                        st.cancel();
                         break;
                     }
                 }

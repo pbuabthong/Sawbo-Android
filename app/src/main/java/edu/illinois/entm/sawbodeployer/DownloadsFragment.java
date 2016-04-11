@@ -189,8 +189,21 @@ public class DownloadsFragment extends Fragment {
                             new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    deleteVideoAtPos(position, dialogVideo);
-                                    dialog.dismiss();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                    builder.setMessage("Are you sure you want to delete this video?")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface d, int id) {
+                                                    deleteVideoAtPos(position, dialogVideo);
+                                                    dialog.dismiss();
+                                                }
+                                            })
+                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface d, int id) {
+                                                }
+                                            });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
                                 }
                             }
                     );
@@ -341,12 +354,16 @@ public class DownloadsFragment extends Fragment {
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             ct.cancel();
-                                            progressDialog.dismiss();
+                                            if(progressDialog!=null) {
+                                                progressDialog.dismiss();
+                                            }
                                         }
                                     })
                                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            progressDialog.show();
+                                            if(progressDialog!=null) {
+                                                progressDialog.show();
+                                            }
                                             return;
                                         }
                                     });
@@ -355,7 +372,9 @@ public class DownloadsFragment extends Fragment {
                         }
                     });
                     progressDialog.setCanceledOnTouchOutside(true);
-                    progressDialog.show();
+                    if(progressDialog!=null) {
+                        progressDialog.show();
+                    }
                     break;
                 }
 
@@ -415,12 +434,16 @@ public class DownloadsFragment extends Fragment {
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     ct.cancel();
-                                    progressDialog.dismiss();
+                                    if(progressDialog!=null) {
+                                        progressDialog.dismiss();
+                                    }
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    progressDialog.show();
+                                    if(progressDialog!=null) {
+                                        progressDialog.show();
+                                    }
                                     return;
                                 }
                             });
@@ -429,7 +452,9 @@ public class DownloadsFragment extends Fragment {
                 }
             });
             progressDialog.setCanceledOnTouchOutside(true);
-            progressDialog.show();
+            if(progressDialog!=null) {
+                progressDialog.show();
+            }
             ct = new ClientThread(device, clientHandler);
             ct.start();
             /*wl.writeNow(getActivity(), "sharecontentviaapp", videoFilename, "", address);
