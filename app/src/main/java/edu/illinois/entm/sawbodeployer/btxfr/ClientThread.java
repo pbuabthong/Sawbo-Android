@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.UUID;
 
 //import com.simonguest.btxfr.Constants;
@@ -98,7 +100,7 @@ public class ClientThread extends Thread {
                                 inputStream.read(header, 0, 1);
                                 incomingDigest[incomingIndex++] = header[0];
                                 if (incomingIndex == 16) {
-                                    if (Utils.digestMatch(payload, incomingDigest)) {
+                                    if (MessageDigest.isEqual(digest, incomingDigest)) {
                                         Log.v(TAG, "Digest matched OK.  Data was received OK.");
                                         ClientThread.this.handler.sendEmptyMessage(MessageType.DATA_SENT_OK);
                                     } else {
@@ -136,7 +138,7 @@ public class ClientThread extends Thread {
                 socket.close();
             }
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            Log.e(TAG + "Cancel exception: ", e.toString());
         }
     }
 }

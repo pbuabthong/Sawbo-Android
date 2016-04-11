@@ -71,8 +71,6 @@ public class ShareFragment extends Fragment {
     ServerThread st;
     ClientThread ct;
 
-    boolean receiving = true;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -316,7 +314,6 @@ public class ShareFragment extends Fragment {
 
                         }
 
-                        File f = new File(getActivity().getFilesDir() + "/" + fileString);
                         try {
                             FileOutputStream fos = getActivity().openFileOutput(fileString, Context.MODE_PRIVATE);
                             fos.write(realByte, 0, realByte.length);
@@ -341,7 +338,7 @@ public class ShareFragment extends Fragment {
 
                             //BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(f));
 //                        bos.write(realByte, 0, realByte.length);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
 
                         }
 
@@ -355,63 +352,81 @@ public class ShareFragment extends Fragment {
                     }
 
                     case MessageType.DIGEST_DID_NOT_MATCH: {
+                        if(progressDialog!=null){
+                            progressDialog.dismiss();
+                            progressDialog=null;
+                        }
+                        if (waitingDialog!=null){
+                            waitingDialog.dismiss();
+                            waitingDialog=null;
+                        }
                         Toast.makeText(getActivity(), getResources().getString(R.string.sendfail_str), Toast.LENGTH_SHORT).show();
                         break;
                     }
 
                     case MessageType.DATA_PROGRESS_UPDATE: {
                         // some kind of update
-                        progressData = (ProgressData) message.obj;
-                        double pctRemaining = 100 - (((double) progressData.remainingSize / progressData.totalSize) * 100);
-                        if (progressDialog == null && receiving) {
-                            progressDialog = new ProgressDialog(getActivity());
-                            progressDialog.setMessage(getResources().getString(R.string.receiving_str));
-                            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            progressDialog.setProgress(0);
-                            progressDialog.setMax(100);
-                            progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                    builder.setMessage(getActivity().getResources().getString(R.string.stopreceving_str))
-                                            .setCancelable(false)
-                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    st.cancel();
-                                                    if(progressDialog!=null){
-                                                        progressDialog.dismiss();
-                                                        progressDialog=null;
-                                                    }
-                                                    receiving=false;
-                                                    if (waitingDialog!=null){
-                                                        waitingDialog.dismiss();
-                                                        waitingDialog=null;
-                                                    }
+                        try {
+                            progressData = (ProgressData) message.obj;
+                            double pctRemaining = 100 - (((double) progressData.remainingSize / progressData.totalSize) * 100);
+                            if (progressDialog == null) {
+                                progressDialog = new ProgressDialog(getActivity());
+                                progressDialog.setMessage(getResources().getString(R.string.receiving_str));
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                                progressDialog.setProgress(0);
+                                progressDialog.setMax(100);
+                                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(DialogInterface dialog) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                        builder.setMessage(getActivity().getResources().getString(R.string.stopreceving_str))
+                                                .setCancelable(false)
+                                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        st.cancel();
+                                                        if (progressDialog != null) {
+                                                            progressDialog.dismiss();
+                                                            progressDialog = null;
+                                                        }
+                                                        if (waitingDialog != null) {
+                                                            waitingDialog.dismiss();
+                                                            waitingDialog = null;
+                                                        }
 
-                                                }
-                                            })
-                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    progressDialog.show();
-                                                    return;
-                                                }
-                                            });
-                                    AlertDialog alert = builder.create();
-                                    alert.show();
-                                }
-                            });
+                                                    }
+                                                })
+                                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        progressDialog.show();
+                                                        return;
+                                                    }
+                                                });
+                                        AlertDialog alert = builder.create();
+                                        alert.show();
+                                    }
+                                });
                                 progressDialog.setCanceledOnTouchOutside(true);
                                 progressDialog.show();
 
-                        }
-                        if (receiving) {
-                            progressDialog.setProgress((int) Math.floor(pctRemaining));
+                            }
+                                progressDialog.setProgress((int) Math.floor(pctRemaining));
+
+                        }catch(Exception e){
+                            Log.v("Receiving exception: ", e.getMessage());
                         }
                         break;
 
                     }
 
                     case MessageType.INVALID_HEADER: {
+                        if(progressDialog!=null){
+                            progressDialog.dismiss();
+                            progressDialog=null;
+                        }
+                        if (waitingDialog!=null){
+                            waitingDialog.dismiss();
+                            waitingDialog=null;
+                        }
                         Toast.makeText(getActivity(), getResources().getString(R.string.wrongheader_str), Toast.LENGTH_SHORT).show();
                         break;
                     }
@@ -421,14 +436,13 @@ public class ShareFragment extends Fragment {
 
     public void receiverBTReader() {
         Log.v("Bluetooth", "Bluetooth is ready for receiver.");
-        if(st!=null) {
+        if (st != null) {
             st.cancel();
         }
-
         st = new ServerThread(mBluetoothAdapter, serverHandler);
-        receiving=true;
         st.start();
 
     }
 }
+
 

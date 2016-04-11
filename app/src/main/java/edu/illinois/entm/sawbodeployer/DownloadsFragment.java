@@ -364,11 +364,18 @@ public class DownloadsFragment extends Fragment {
                         progressDialog.dismiss();
                         progressDialog = null;
                     }
+                    ct.cancel();
                     Toast.makeText(getActivity(), getResources().getString(R.string.sent_str), Toast.LENGTH_SHORT).show();
                     break;
                 }
 
                 case MessageType.DIGEST_DID_NOT_MATCH: {
+
+                    if(progressDialog!=null){
+                        progressDialog.dismiss();
+                        progressDialog=null;
+                    }
+                    ct.cancel();
                     Toast.makeText(getActivity(), getResources().getString(R.string.sendfail_str), Toast.LENGTH_SHORT).show();
                     break;
                 }

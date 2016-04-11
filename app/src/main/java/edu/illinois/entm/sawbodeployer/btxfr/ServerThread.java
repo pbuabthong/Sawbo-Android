@@ -4,10 +4,13 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import java.io.IOException;
 import java.util.UUID;
+
+import edu.illinois.entm.sawbodeployer.ShareFragment;
 
 public class ServerThread extends Thread {
     private final String TAG = "android-btxfr/ServerThread";
@@ -36,7 +39,6 @@ public class ServerThread extends Thread {
             try {
                 Log.v(TAG, "Opening new server socket");
                 socket = serverSocket.accept();
-                serverSocket.close();
 
                 try {
                     Log.v(TAG, "Got connection from client.  Spawning new data transfer thread.");
@@ -56,7 +58,8 @@ public class ServerThread extends Thread {
     public void cancel() {
         try {
             Log.v(TAG, "Trying to close the server socket");
-            if(socket.isConnected()){
+            serverSocket.close();
+            if(socket.isConnected()) {
                 socket.close();
             }
         } catch (Exception e) {
@@ -65,7 +68,6 @@ public class ServerThread extends Thread {
     }
     public void cancelRun(){
         try{
-
             serverSocket.close();
         }catch (Exception e){
             //TODO

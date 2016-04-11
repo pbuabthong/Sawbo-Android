@@ -55,62 +55,19 @@ android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="20dip"
         android:scaleType="centerInside"
-        android:src="@drawable/logoph"
+        android:src="@drawable/newsawbologo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:id="@+id/imageView" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:scaleType="centerInside"
-        android:src="@drawable/sawbo"
-        android:id="@+id/imageView2"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:scaleType="centerInside"
-        android:src="@drawable/fullsawbo"
-        android:id="@+id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1" >
-        <TextView
-            android:id="@+id/txtaddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/address"/>
-
-        <TextView
-            android:id="@+id/txtaddress2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/address2"/>
-
-        <TextView
-            android:id="@+id/txtaddress3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/address3"/>
-
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dip"
