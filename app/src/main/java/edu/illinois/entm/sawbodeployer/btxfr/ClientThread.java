@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -67,12 +68,14 @@ public class ClientThread extends Thread {
             {
                 if (message.obj != null)
                 {
+                    ProgressData progressData = new ProgressData();
                     Log.v(TAG, "Handle received data to send");
                     byte[] payload = (byte[])message.obj;
 
                     try {
-                        handler.sendEmptyMessage(MessageType.SENDING_DATA);
                         OutputStream outputStream = socket.getOutputStream();
+                        BufferedOutputStream bufOutputStream = new BufferedOutputStream(outputStream, Constants.CHUNK_SIZE);
+
 
                         // Send the header control first
                         outputStream.write(Constants.HEADER_MSB);
@@ -86,8 +89,27 @@ public class ClientThread extends Thread {
                         outputStream.write(digest);
 
                         // now write the data
-                        outputStream.write(payload);
-                        outputStream.flush();
+                        progressData.totalSize = payload.length;
+                        progressData.remainingSize=progressData.totalSize;
+                        int i=Constants.CHUNK_SIZE;
+                        while(true){
+                            outputStream.write(payload, (int)(progressData.totalSize-progressData.remainingSize), i);
+                            progressData.remainingSize -= Constants.CHUNK_SIZE;
+                            if ((int)(progressData.remainingSize)<Constants.CHUNK_SIZE){
+                                i=(int)(progressData.remainingSize);
+                            }
+                            Message k = new Message();
+                            k.obj = progressData;
+                            k.what = MessageType.SENDING_DATA;
+                            handler.sendMessage(k);
+
+                            if(progressData.remainingSize<=0){
+                                break;
+                            }
+                        }
+
+                        //outputStream.write(payload);
+                        //outputStream.flush();
 
                         Log.v(TAG, "Data sent.  Waiting for return digest as confirmation");
                         InputStream inputStream = socket.getInputStream();
@@ -118,7 +140,10 @@ public class ClientThread extends Thread {
                         Log.v(TAG, "Closing the client socket.");
                         socket.close();
 
-                    } catch (Exception e) {
+                    } catch (IOException e) {
+                        Log.e(TAG, e.toString());
+                        handler.sendEmptyMessage(MessageType.EXCEPTION);
+                    } catch (Exception e){
                         Log.e(TAG, e.toString());
                     }
 

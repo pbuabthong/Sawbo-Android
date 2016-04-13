@@ -6,8 +6,10 @@ import android.os.Message;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.MessageDigest;
 import java.util.Arrays;
 
 class DataTransferThread extends Thread {
@@ -95,8 +97,11 @@ class DataTransferThread extends Thread {
             Log.v(TAG, "Closing server socket");
             socket.close();
 
-        } catch (Exception ex) {
-            Log.d(TAG, ex.toString());
+        }catch (IOException e) {
+            Log.e(TAG, e.toString());
+            handler.sendEmptyMessage(MessageType.EXCEPTION);
+        } catch (Exception e){
+            Log.e(TAG, e.toString());
         }
     }
 

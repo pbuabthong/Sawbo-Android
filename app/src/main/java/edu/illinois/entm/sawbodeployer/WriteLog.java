@@ -34,7 +34,7 @@ import java.util.Random;
  */
 public class WriteLog {
 
-    private String appID = "0011";
+    private String appID = "0001";
     private double[] getGPS(Activity act) {
         LocationManager lm = (LocationManager) act.getSystemService(Context.LOCATION_SERVICE);
         final Criteria criteria = new Criteria();

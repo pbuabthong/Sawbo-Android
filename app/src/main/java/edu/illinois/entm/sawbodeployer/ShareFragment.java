@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -77,6 +78,7 @@ public class ShareFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         rootView = inflater.inflate(R.layout.fragment_share, container, false);
 
         Button sharesawbo_txt_btn = (Button) rootView.findViewById(R.id.sharesawboapp_txt_btn);
@@ -458,6 +460,19 @@ public class ShareFragment extends Fragment {
                             waitingDialog=null;
                         }
                         Toast.makeText(getActivity(), getResources().getString(R.string.wrongheader_str), Toast.LENGTH_SHORT).show();
+                        st.cancel();
+                        break;
+                    }
+                    case MessageType.EXCEPTION: {
+                        if(progressDialog!=null){
+                            progressDialog.dismiss();
+                            progressDialog=null;
+                        }
+                        if (waitingDialog!=null){
+                            waitingDialog.dismiss();
+                            waitingDialog=null;
+                        }
+                        Toast.makeText(getActivity(), "Receiving failed. Sharing was most likely canceled.", Toast.LENGTH_SHORT).show();
                         st.cancel();
                         break;
                     }

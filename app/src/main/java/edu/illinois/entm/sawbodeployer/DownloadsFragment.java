@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -68,6 +69,8 @@ public class DownloadsFragment extends Fragment {
     private BluetoothDevice mDevice;
     private boolean viaOBEX = false;
 
+    boolean firstTime=true;
+
     ServerThread st;
     ClientThread ct;
 
@@ -80,6 +83,8 @@ public class DownloadsFragment extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         rootView = inflater.inflate(R.layout.fragment_downloads, container, false);
         prepareTable();
+
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         return rootView;
     }
 
@@ -292,6 +297,7 @@ public class DownloadsFragment extends Fragment {
         public void handleMessage(Message message) {
             switch (message.what) {
                 case MessageType.READY_FOR_DATA: {
+                    firstTime = true;
                     Toast.makeText(getActivity(), "Ready to send", Toast.LENGTH_SHORT).show();
                     try {
                         byte[] dataToSend = org.apache.commons.io.FileUtils.readFileToByteArray(new File(url));
@@ -323,6 +329,7 @@ public class DownloadsFragment extends Fragment {
 
                 case MessageType.COULD_NOT_CONNECT: {
                     progressDialog.dismiss();
+                    firstTime = true;
                     Toast.makeText(getActivity(), "Could not connect to the paired device", Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage(getActivity().getResources().getString(R.string.cannotcon_str))
@@ -338,11 +345,12 @@ public class DownloadsFragment extends Fragment {
                 }
 
                 case MessageType.SENDING_DATA: {
-                    if (progressDialog != null) {
+                    if (progressDialog != null && firstTime) {
                         progressDialog.dismiss();
                         progressDialog = null;
+                        firstTime = false;
                     }
-                    progressDialog = new ProgressDialog(getActivity());
+                    /*progressDialog = new ProgressDialog(getActivity());
                     progressDialog.setMessage(getResources().getString(R.string.sending_str));
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -374,6 +382,56 @@ public class DownloadsFragment extends Fragment {
                     progressDialog.setCanceledOnTouchOutside(true);
                     if(progressDialog!=null) {
                         progressDialog.show();
+                    }*/
+                    try {
+                        progressData = (ProgressData) message.obj;
+                        double pctRemaining = 100 - (((double) progressData.remainingSize / progressData.totalSize) * 100);
+                        if (progressDialog == null) {
+                            progressDialog = new ProgressDialog(getActivity());
+                            progressDialog.setMessage(getResources().getString(R.string.sending_str));
+                            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                            progressDialog.setProgress(0);
+                            progressDialog.setMax(100);
+                            progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                    builder.setMessage(getActivity().getResources().getString(R.string.stopsending_str))
+                                            .setCancelable(false)
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    ct.cancel();
+                                                    if (progressDialog != null) {
+                                                        progressDialog.dismiss();
+                                                        progressDialog = null;
+                                                    }
+                                                    firstTime = true;
+                                                }
+                                            })
+                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    if(progressDialog!=null) {
+                                                        progressDialog.show();
+                                                    }
+                                                    return;
+                                                }
+                                            });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                }
+                            });
+                            progressDialog.setCanceledOnTouchOutside(true);
+                            if(progressDialog!=null) {
+                                progressDialog.show();
+                            }
+
+                        }
+                        if(progressDialog!=null) {
+                            progressDialog.setProgress((int) Math.floor(pctRemaining));
+                        }
+
+                    }catch(Exception e){
+                        Log.v("Receiving exception: ", e.getMessage());
                     }
                     break;
                 }
@@ -383,8 +441,20 @@ public class DownloadsFragment extends Fragment {
                         progressDialog.dismiss();
                         progressDialog = null;
                     }
+                    firstTime = true;
                     ct.cancel();
                     Toast.makeText(getActivity(), getResources().getString(R.string.sent_str), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+                case MessageType.EXCEPTION: {
+                    if (progressDialog != null) {
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                    }
+                    firstTime = true;
+                    ct.cancel();
+                    Toast.makeText(getActivity(), "Sending Failed. Sharing was most likely canceled.", Toast.LENGTH_LONG).show();
                     break;
                 }
 
@@ -394,6 +464,7 @@ public class DownloadsFragment extends Fragment {
                         progressDialog.dismiss();
                         progressDialog=null;
                     }
+                    firstTime = true;
                     ct.cancel();
                     Toast.makeText(getActivity(), getResources().getString(R.string.sendfail_str), Toast.LENGTH_SHORT).show();
                     break;
