@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Nima\Desktop\test\Sawbo-Android\app\libs\android-support-v4.jar"
+        jar="/Users/m_antik/git/Sawbo-Android/app/libs/android-support-v4.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="4a6be13368bb64c5a0b0460632d228a1a915f58f">
-        <dex dex="C:\Users\Nima\Desktop\test\Sawbo-Android\app\build\intermediates\pre-dexed\debug\android-support-v4-c7e2357d9548ac7333c2655d737bc949f30c072c.jar" />
+        <dex dex="/Users/m_antik/git/Sawbo-Android/app/build/intermediates/pre-dexed/debug/android-support-v4-bc2ece0b7022b05446b7734226935d0f1845f4f2.jar" />
     </item>
     <item
-        jar="C:\Users\Nima\Desktop\test\Sawbo-Android\app\libs\commons-io-2.4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="C:\Users\Nima\Desktop\test\Sawbo-Android\app\build\intermediates\pre-dexed\debug\commons-io-2.4-d8e8c81989847449eceadc3146ac5a504e61e9ce.jar" />
-    </item>
-    <item
-        jar="C:\Users\Nima\Desktop\test\Sawbo-Android\app\libs\acra-4.6.1.jar"
+        jar="/Users/m_antik/git/Sawbo-Android/app/libs/acra-4.6.1.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="60a854db6e9445f56efc72bfb3da39f583eb6e89">
-        <dex dex="C:\Users\Nima\Desktop\test\Sawbo-Android\app\build\intermediates\pre-dexed\debug\acra-4.6.1-ad5c41d9e102c846152c55c05c62355bf7a1bbdf.jar" />
+        <dex dex="/Users/m_antik/git/Sawbo-Android/app/build/intermediates/pre-dexed/debug/acra-4.6.1-2a638c0714ece62aea051c42fb5f5df5b5583f49.jar" />
+    </item>
+    <item
+        jar="/Users/m_antik/git/Sawbo-Android/app/libs/commons-io-2.4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/m_antik/git/Sawbo-Android/app/build/intermediates/pre-dexed/debug/commons-io-2.4-cb8f5f55f113112ab36e37f8e8bad6375d571ba2.jar" />
     </item>
 
 </items>
