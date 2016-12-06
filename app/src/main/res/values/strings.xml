@@ -14,12 +14,12 @@
     <string name="twice" translatable="false">Press twice to exit</string>
 
     <!-- URL -->
-    <string name="donate_url" translatable="false">http://www.sawbo-illinois.org/donate.htm</string>
+    <string name="donate_url" translatable="false">http://www.sawbo-animations.org/donate</string>
     <string name="totallist_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/totallist_sources_test.php</string>
     <string name="video_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/sources_test/</string>
     <string name="email_url" translatable="false">contact@sawbo-animations.org</string>
     <string name="sawbo_url" translatable="false">http://www.sawbo-illinois.org/</string>
-    <string name="call_url" translatable="false">tel:+12173336538</string>
+    <string name="call_url" translatable="false">tel:+15174320139</string>
     <string name="title_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/title/title.txt</string>
     <string name="ip_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/ip.php</string>
     <string name="gsim_url" translatable="false">gsim.cs.illinois.edu</string>
