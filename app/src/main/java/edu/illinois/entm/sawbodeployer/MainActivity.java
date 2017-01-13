@@ -51,7 +51,7 @@ import edu.illinois.entm.sawbodeployer.R;
         },
         mode = ReportingInteractionMode.TOAST
 )
-
+@SuppressWarnings("ResourceType")
 public class MainActivity extends FragmentActivity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList, langList;
