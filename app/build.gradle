@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "edu.msu.sawbo"
+        applicationId "edu.uiuc.sawbo"
         minSdkVersion 15
         targetSdkVersion 19
         versionCode 3
