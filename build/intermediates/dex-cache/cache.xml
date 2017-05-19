@@ -3,21 +3,21 @@
 
     <item
         is-multidex="false"
-        jar="/Users/maryamantikchi/git/Sawbo-Android/app/libs/commons-io-2.4.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="21.1.2"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/release/commons-io-2.4_1fb0aae61e00cc8446e5ebb5f3b0a9a7c2a2376f.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/maryamantikchi/git/Sawbo-Android/app/libs/android-support-v4.jar"
         jumboMode="false"
         optimize="true"
         revision="21.1.2"
         sha1="4a6be13368bb64c5a0b0460632d228a1a915f58f">
         <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/release/android-support-v4_20963b3b839b7e0e5f55987013ce19d982f9a789.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/maryamantikchi/git/Sawbo-Android/app/libs/commons-io-2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/release/commons-io-2.4_1fb0aae61e00cc8446e5ebb5f3b0a9a7c2a2376f.jar" />
     </item>
     <item
         is-multidex="false"

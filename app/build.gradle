@@ -5,11 +5,11 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "edu.uiuc.sawbo"
+        applicationId "edu.mcu.sawbo"
         minSdkVersion 15
         targetSdkVersion 19
-        versionCode 3
-        versionName "2.0.5"
+        versionCode 1
+        versionName "1.1.0"
     }
     buildTypes {
         release {
