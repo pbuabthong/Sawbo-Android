@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name" translatable="false">SAWBO</string>
-    <string name="app_package" translatable="false">edu.uiuc.sawbo</string>
+    <string name="app_package" translatable="false">edu.mcu.sawbo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Language Interface</string>
     <string name="drawer_open">Slider Menu Opened</string>

@@ -23,8 +23,8 @@ import java.util.StringTokenizer;
 
 import edu.illinois.entm.sawbodeployer.R;
 
-//import edu.uiuc.sawbo.adapter.BrowseFilterArrayAdapter;
-//import edu.uiuc.sawbo.adapter.BrowseListArrayAdapter;
+//import edu.mcu.sawbo.adapter.BrowseFilterArrayAdapter;
+//import edu.mcu.sawbo.adapter.BrowseListArrayAdapter;
 
 /**
  * Created by Pakpoomb.
@@ -193,4 +193,3 @@ public class FilterFragment extends Fragment {
         return null;
     }
 }
-

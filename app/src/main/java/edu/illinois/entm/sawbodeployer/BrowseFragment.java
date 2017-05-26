@@ -40,7 +40,7 @@ import java.util.Map;
 
 import edu.illinois.entm.sawbodeployer.adapter.BrowseListArrayAdapter;
 import edu.illinois.entm.sawbodeployer.R;
-//import edu.uiuc.sawbo.PrepareTitle;
+//import edu.mcu.sawbo.PrepareTitle;
 
 public class BrowseFragment extends Fragment {
 
