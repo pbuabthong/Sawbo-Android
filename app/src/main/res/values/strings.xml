@@ -22,7 +22,7 @@
     <string name="call_url" translatable="false">tel:+15174320139</string>
     <string name="title_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/title/title.txt</string>
     <string name="ip_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/ip.php</string>
-    <string name="gsim_url" translatable="false">gsim.cs.illinois.edu</string>
+    <string name="gsim_url" translatable="false">sawbo-illinois.org</string>
     <string name="newsjson_url" translatable="false">http://www.sawbo-illinois.org/mobile_app/news.json</string>
 
     <!-- Email -->

@@ -205,7 +205,7 @@ public class WriteLog {
 
             try {
                 //Socket logSocket = new Socket(act.getResources().getString(R.string.gsim_url), act.getResources().getInteger(R.integer.gsim_port));
-                Socket logSocket = new Socket("mcdm.sawbo.illinois.edu", 1731);
+                Socket logSocket = new Socket("sawbo-illinois.org", 1731);
                 //Socket logSocket = new Socket();
                 //logSocket.connect(new InetSocketAddress("gsim.cs.illinois.edu", 1731), 500);
                 //if (logSocket.isConnected()) {

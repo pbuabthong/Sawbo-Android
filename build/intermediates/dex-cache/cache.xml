@@ -8,7 +8,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="4a6be13368bb64c5a0b0460632d228a1a915f58f">
-        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/release/android-support-v4_20963b3b839b7e0e5f55987013ce19d982f9a789.jar" />
+        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/debug/android-support-v4_20963b3b839b7e0e5f55987013ce19d982f9a789.jar" />
     </item>
     <item
         is-multidex="false"
@@ -17,7 +17,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/release/commons-io-2.4_1fb0aae61e00cc8446e5ebb5f3b0a9a7c2a2376f.jar" />
+        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/debug/commons-io-2.4_1fb0aae61e00cc8446e5ebb5f3b0a9a7c2a2376f.jar" />
     </item>
     <item
         is-multidex="false"
@@ -26,7 +26,7 @@
         optimize="true"
         revision="21.1.2"
         sha1="60a854db6e9445f56efc72bfb3da39f583eb6e89">
-        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/release/acra-4.6.1_ef8d83aa3063ce6412ae811a7b1ea9a28a30c13c.jar" />
+        <dex dex="/Users/maryamantikchi/git/Sawbo-Android/app/build/intermediates/pre-dexed/debug/acra-4.6.1_ef8d83aa3063ce6412ae811a7b1ea9a28a30c13c.jar" />
     </item>
 
 </items>
